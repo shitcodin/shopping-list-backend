@@ -1,0 +1,126 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-01-01T00:00:00.000Z",
+  "__export_source": "codex-cli",
+  "resources": [
+    {
+      "_id": "wrk_shoppingList",
+      "_type": "workspace",
+      "name": "Shopping List API",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "parentId": "wrk_shoppingList",
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "http://localhost:3000",
+        "token": "Bearer <paste token>"
+      }
+    },
+    {
+      "_id": "req_mock_login",
+      "_type": "request",
+      "parentId": "wrk_shoppingList",
+      "name": "auth/mockLogin",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/auth/mockLogin",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"userId\": \"user-1\",\n  \"role\": \"Users\"\n}"
+      }
+    },
+    {
+      "_id": "req_shopping_create",
+      "_type": "request",
+      "parentId": "wrk_shoppingList",
+      "name": "shoppingList/create",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/shoppingList/create",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Groceries\",\n  \"items\": [\"item-1\", \"item-2\"]\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_shopping_list",
+      "_type": "request",
+      "parentId": "wrk_shoppingList",
+      "name": "shoppingList/list",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/shoppingList/list",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"pageIndex\": 0,\n  \"pageSize\": 50\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_shopping_get",
+      "_type": "request",
+      "parentId": "wrk_shoppingList",
+      "name": "shoppingList/get",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/shoppingList/get",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"id\": \"<shoppingListId>\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_shopping_update",
+      "_type": "request",
+      "parentId": "wrk_shoppingList",
+      "name": "shoppingList/update",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/shoppingList/update",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"id\": \"<shoppingListId>\",\n  \"items\": [\"item-3\"],\n  \"name\": \"Updated list\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_shopping_delete",
+      "_type": "request",
+      "parentId": "wrk_shoppingList",
+      "name": "shoppingList/delete",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/shoppingList/delete",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"id\": \"<shoppingListId>\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        }
+      ]
+    }
+  ]
+}
